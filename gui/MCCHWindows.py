@@ -1,5 +1,8 @@
-from PySide6.QtWidgets import QMainWindow, QPushButton
-from PySide6.QtGui import QIcon
+import time
+
+import PySide6.QtGui
+from PySide6.QtWidgets import QMainWindow, QPushButton,QApplication
+from PySide6.QtGui import QIcon,Qt
 from PySide6.QtCore import Qt,Signal,Slot
 import mcchres.res_rcc
 from ui import (mainwindow,framelesswindow)
@@ -12,7 +15,6 @@ class MCCHMainWindow(QMainWindow):
         self.setWindowFlag()
 
 class MCCHFrameLessWindow(QMainWindow):
-
     def __init__(self):
         super(MCCHFrameLessWindow, self).__init__()
         self.ui = framelesswindow.Ui_MainWindow()
@@ -21,7 +23,6 @@ class MCCHFrameLessWindow(QMainWindow):
         self.ui.btn_min.clicked.connect(self.click_min)
         self.ui.btn_max.clicked.connect(self.click_max)
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
-
     @Slot()
     def click_close(self):
         self.close()
@@ -30,7 +31,7 @@ class MCCHFrameLessWindow(QMainWindow):
         self.showMinimized()
     @Slot()
     def click_max(self):
-        if self.isMaximized():
+        if self.isFullScreen():
             self.showNormal()
         else:
             self.showMaximized()
